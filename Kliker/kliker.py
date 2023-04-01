@@ -1,4 +1,4 @@
-from Klik.App import klik_engine
+from App import klik_engine
 import sys
 
 game = klik_engine.Game()
