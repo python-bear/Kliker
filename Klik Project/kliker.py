@@ -1,4 +1,4 @@
-from Klik.App import klik_engine, klik_utils
+from App import klik_engine, klik_utils
 import os
 
 
