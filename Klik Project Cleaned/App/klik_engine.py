@@ -37,7 +37,7 @@ class Game:
         self.button_text_rect = None
         self.button_color = self.BUTTON_IDLE_COLOR
 
-        base_path = os.path.dirname(os.path.abspath(__file__)).replace("\\App", "")
+        base_path = os.path.abspath(__file__).replace('\\klik_engine.py', '').replace('\\App', '')
         self.README_PATH = f'{base_path}/App/README.md'
 
         self.ERROR_SOUND = pygame.mixer.Sound('Lib/error.wav')
@@ -124,7 +124,11 @@ class Game:
                     utils.finish()
 
                 elif event.type == pygame.KEYDOWN and (event.key == pygame.K_LCTRL or event.key == pygame.K_RCTRL):
-                    os.startfile(self.README_PATH)
+                    try:
+                        os.startfile(self.README_PATH)
+
+                    except Exception as _error:
+                        pass
 
             self.window.fill(self.BACKGROUND_COLOR)
 
@@ -174,7 +178,11 @@ class Game:
                         self.help_page(from_cheat=True)
 
                     elif event.key == pygame.K_LCTRL or event.key == pygame.K_RCTRL:
-                        os.startfile(self.README_PATH)
+                        try:
+                            os.startfile(self.README_PATH)
+
+                        except Exception as _error:
+                            pass
 
             self.window.fill(self.BACKGROUND_COLOR)
 
@@ -279,7 +287,11 @@ class Game:
                         self.help_page()
 
                     elif event.key == pygame.K_LCTRL or event.key == pygame.K_RCTRL:
-                        os.startfile(self.README_PATH)
+                        try:
+                            os.startfile(self.README_PATH)
+
+                        except Exception as _error:
+                            pass
 
             current_time = get_current_time()
             self.clicks = [click for click in self.clicks if current_time - click <= 1]
