@@ -3,6 +3,7 @@ from pickle import dump as pickle_dump
 from time import time as get_current_time
 from random import randint as random_int
 import os
+import sys
 
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 
@@ -37,8 +38,12 @@ class Game:
         self.button_text_rect = None
         self.button_color = self.BUTTON_IDLE_COLOR
 
-        base_path = os.path.abspath(__file__).replace('\\klik_engine.py', '').replace('\\App', '')
-        self.README_PATH = f'{base_path}/App/README.md'
+        if getattr(sys, 'frozen', False):
+            base_path = os.path.dirname(sys.executable)
+        else:
+            base_path = os.path.abspath(os.path.dirname(__file__))
+
+        self.README_PATH = os.path.join(base_path, 'App', 'README.md')
 
         self.ERROR_SOUND = pygame.mixer.Sound('Lib/error.wav')
         self.window = pygame.display.set_mode((self.WINDOW_WIDTH, self.WINDOW_HEIGHT))
@@ -124,11 +129,8 @@ class Game:
                     utils.finish()
 
                 elif event.type == pygame.KEYDOWN and (event.key == pygame.K_LCTRL or event.key == pygame.K_RCTRL):
-                    try:
-                        os.startfile(self.README_PATH)
+                    os.startfile(self.README_PATH)
 
-                    except Exception as _error:
-                        pass
 
             self.window.fill(self.BACKGROUND_COLOR)
 
